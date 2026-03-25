@@ -1,5 +1,5 @@
 generator client {
-  provider     = "prisma-client"
+  provider     = "prisma-client-js"
   output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
@@ -9,6 +9,8 @@ datasource db {
 }
 
 model store {
+  id         BigInt   @id @default(autoincrement())
+  publicId   String   @unique @db.Uuid @default(uuid())
   nome       String   @db.VarChar(200)
   cnpj       String   @db.VarChar(18)
   rua        String   @db.VarChar(200)
@@ -19,8 +21,7 @@ model store {
   telefone   String   @db.VarChar(20)
   ativa      Boolean  @default(true)
   created_at DateTime @default(now())
-  updated_at DateTime
+  updated_at DateTime @updatedAt 
   email      String   @unique @db.VarChar(200)
-  id         String   @id @db.Uuid
   estado     String   @db.VarChar(2)
 }

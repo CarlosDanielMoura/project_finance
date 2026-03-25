@@ -1,0 +1,27 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model store {
+  id         BigInt   @id @default(autoincrement())
+  publicId   String   @unique @default(uuid()) @db.Uuid
+  nome       String   @db.VarChar(200)
+  cnpj       String   @db.VarChar(18)
+  rua        String   @db.VarChar(200)
+  numero     String   @db.VarChar(20)
+  bairro     String   @db.VarChar(100)
+  cidade     String   @db.VarChar(100)
+  cep        String   @db.VarChar(10)
+  telefone   String   @db.VarChar(20)
+  ativa      Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  email      String   @unique @db.VarChar(200)
+  estado     String   @db.VarChar(2)
+}
